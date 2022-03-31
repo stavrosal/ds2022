@@ -51,7 +51,7 @@ int main(){
     NodeType lista[NumberOfNodes];
     ListPointer FreePtr, Ptr, PredPtr;
 
-    NodeFreq syxn[10];
+    NodeFreq syxn[NumberOfNodes];
     ListPointer deikths, FreePtr1, PredPtr1;
 
     do {
