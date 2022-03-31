@@ -44,7 +44,7 @@ void TraverseFreqLinked(ListPointer List, NodeFreq Node[]);
 void InsertFreq(ListPointer *List, NodeFreq Node[],ListPointer *FreePtr, ListPointer PredPtr, ListElementType Item1, ListElementType Item2);
 void GetNodeFreq(ListPointer *P, ListPointer *FreePtr, NodeFreq Node[]);
 
-void GetFrequencies(NodeType Node[], NodeFreq domh[], ListPointer *Ptr, ListPointer *deikths, ListPointer *FreePtr1, ListPointer PredPtr1, int obs);
+void GetFrequencies(NodeType Node[], NodeFreq domh[], ListPointer *List, ListPointer *deikths, ListPointer *FreePtr1, ListPointer PredPtr1, int obs);
 
 int main(){
     int n, i, item;
@@ -79,6 +79,11 @@ int main(){
     CreateList(&deikths);
     PredPtr1 = NilValue;
 
+    for (i=0; i<10; i++){
+            InsertFreq(&deikths, syxn, &FreePtr1, PredPtr1, i, 0);
+        }
+
+
     printf("\n2h Lista Syxnothtwn\n");
     GetFrequencies(lista, syxn, &Ptr, &deikths, &FreePtr1, PredPtr1, n);
     TraverseFreqLinked(deikths, syxn);
@@ -86,16 +91,28 @@ int main(){
     return 0;
 }
 
-void GetFrequencies(NodeType Node[], NodeFreq domh[], ListPointer *Ptr, ListPointer *deikths, ListPointer *FreePtr1, ListPointer PredPtr1, int obs){
+void GetFrequencies(NodeType Node[], NodeFreq domh[], ListPointer *List, ListPointer *deikths, ListPointer *FreePtr1, ListPointer PredPtr1, int obs){
     int i;
-    if (!EmptyList(*Ptr)){
-        for (i=0; i<10; i++){
-            InsertFreq(deikths, domh, FreePtr1, PredPtr1, i, 0);
+    ListPointer CurrPtr, FreqPtr;
+    ListElementType thisValue;
+
+    if(!EmptyList(*List)){
+        CurrPtr = *List;
+        while (CurrPtr != NilValue){
+            thisValue = Node[CurrPtr].Data;
+            FreqPtr = *deikths;
+            while (FreqPtr != NilValue){
+                if (domh[FreqPtr].klash == thisValue){
+                    domh[FreqPtr].Freq = domh[FreqPtr].Freq + 1;
+                    break;
+                }
+                else{
+                    FreqPtr = domh[FreqPtr].Next;
+                }
+            }
+            CurrPtr = Node[CurrPtr].Next;
         }
 
-        for (i=0; i<obs; i++){
-            domh[Node[i].Data].Freq = domh[Node[i].Data].Freq + 1 ;
-        }
     }
     else{
         printf("Empty List ...\n");
