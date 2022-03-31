@@ -38,7 +38,7 @@ int main()
     int nscan,number,number1,i;
     char temch,ono[20];
     NodeType fashA[NumberOfNodes],fashB[NumberOfNodes];
-    ListPointer alist,afreeptr,apreptr=NilValue,blist,bfreeptr,bpreptr=NilValue;
+    ListPointer alist,afreeptr,apreptr=NilValue,blist,bfreeptr,bpreptr=NilValue,currptr;
 
     infile=fopen("students.dat","r");
     if(infile==NULL) exit(1);
@@ -52,6 +52,7 @@ int main()
         if(nscan!=4 || temch!='\n') exit(2);
         Insert(&alist,fashA,&afreeptr,apreptr,ono,number);
     }
+    printf("Question a:\n");
     printAll(alist,afreeptr,fashA);
     printf("Lista A\n");
     TraverseLinked(alist,fashA);
@@ -61,9 +62,33 @@ int main()
             scanf("%d",&number1);
             if(number1>=0 && number1<=NumberOfNodes-1) break;
         }
-        Delete(&number1,fashA,&afreeptr,apreptr,ono,&number);
+        apreptr=NilValue;
+        currptr=alist;
+        while(currptr!=number1){
+            apreptr=currptr;
+            currptr=fashA[currptr].Next;
+        }
+        Delete(&alist,fashA,&afreeptr,apreptr,ono,&number);
         Insert(&blist,fashB,&bfreeptr,bpreptr,ono,number);
+        bpreptr=blist;
+        while(fashB[bpreptr].Next!=NilValue) bpreptr=fashB[bpreptr].Next;
     }
+    printf("Question b:\n");
+    printAll(alist,afreeptr,fashA);
+    printf("Lista A\n");
+    TraverseLinked(alist,fashA);
+    printAll(blist,bfreeptr,fashB);
+    printf("Lista B\n");
+    TraverseLinked(blist,fashB);
+    printf("Question c:\n");
+    bpreptr=NilValue;
+    currptr=blist;
+    while(currptr!=1){
+        bpreptr=currptr;
+        currptr=fashB[currptr].Next;
+    }
+    Delete(&blist,fashB,&bfreeptr,bpreptr,ono,&number);
+    Insert(&alist,fashA,&afreeptr,apreptr,ono,number);
     printAll(alist,afreeptr,fashA);
     printf("Lista A\n");
     TraverseLinked(alist,fashA);
