@@ -44,14 +44,14 @@ void TraverseFreqLinked(ListPointer List, NodeFreq Node[]);
 void InsertFreq(ListPointer *List, NodeFreq Node[],ListPointer *FreePtr, ListPointer PredPtr, ListElementType Item1, ListElementType Item2);
 void GetNodeFreq(ListPointer *P, ListPointer *FreePtr, NodeFreq Node[]);
 
-void GetFrequencies(NodeType Node[], NodeFreq domh[], ListPointer *deikths, ListPointer *FreePtr1, ListPointer PredPtr1, int obs);
+void GetFrequencies(NodeType Node[], NodeFreq domh[], ListPointer *Ptr, ListPointer *deikths, ListPointer *FreePtr1, ListPointer PredPtr1, int obs);
 
 int main(){
     int n, i, item;
     NodeType lista[NumberOfNodes];
     ListPointer FreePtr, Ptr, PredPtr;
 
-    NodeFreq syxn[NumberOfNodes];
+    NodeFreq syxn[10];
     ListPointer deikths, FreePtr1, PredPtr1;
 
     do {
@@ -80,21 +80,25 @@ int main(){
     PredPtr1 = NilValue;
 
     printf("\n2h Lista Syxnothtwn\n");
-    GetFrequencies(lista, syxn, &deikths, &FreePtr1, PredPtr1, n);
+    GetFrequencies(lista, syxn, &Ptr, &deikths, &FreePtr1, PredPtr1, n);
     TraverseFreqLinked(deikths, syxn);
 
     return 0;
 }
 
-void GetFrequencies(NodeType Node[], NodeFreq domh[], ListPointer *deikths, ListPointer *FreePtr1, ListPointer PredPtr1, int obs){
+void GetFrequencies(NodeType Node[], NodeFreq domh[], ListPointer *Ptr, ListPointer *deikths, ListPointer *FreePtr1, ListPointer PredPtr1, int obs){
     int i;
-    for (i=0; i<10; i++){
-        InsertFreq(deikths, domh, FreePtr1, PredPtr1, i, 0);
-        //domh[i].klash = i;
-    }
+    if (!EmptyList(*Ptr)){
+        for (i=0; i<10; i++){
+            InsertFreq(deikths, domh, FreePtr1, PredPtr1, i, 0);
+        }
 
-    for (i=0; i<obs; i++){
-        domh[Node[i].Data].Freq = domh[Node[i].Data].Freq + 1 ;
+        for (i=0; i<obs; i++){
+            domh[Node[i].Data].Freq = domh[Node[i].Data].Freq + 1 ;
+        }
+    }
+    else{
+        printf("Empty List ...\n");
     }
 }
 
