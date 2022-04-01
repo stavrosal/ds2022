@@ -189,6 +189,8 @@ void Delete(ListPointer *List, NodeType Node[], ListPointer *FreePtr, ListPointe
     else
       {
         TempPtr =Node[PredPtr].Next;
+        strcpy(Item1,Node[TempPtr].Data.onoma);
+        *Item2=Node[TempPtr].Data.gymnasio;
         Node[PredPtr].Next =Node[TempPtr].Next;
         ReleaseNode(Node,TempPtr,FreePtr);
       }
