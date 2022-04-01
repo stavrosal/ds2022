@@ -207,7 +207,7 @@ void TraverseLinked(ListPointer List, NodeType Node[])
       CurrPtr =List;
       while (CurrPtr != NilValue)
       {
-          printf("(%d:<%s,%d>->%d) ",CurrPtr,Node[CurrPtr].Data.onoma,Node[CurrPtr].Data.gymnasio, Node[CurrPtr].Next);
+          printf("(%d:<%s,%d> ->%d) ",CurrPtr,Node[CurrPtr].Data.onoma,Node[CurrPtr].Data.gymnasio, Node[CurrPtr].Next);
           CurrPtr=Node[CurrPtr].Next;
        }
        printf("\n");
@@ -221,6 +221,6 @@ void printAll(ListPointer List, ListPointer FreePtr, NodeType Node[])
     printf("1o STOIXEIO LISTAS=%d, 1H FREE POSITION=%d\n", List, FreePtr);
     printf("H STORAGE POOL EXEI TA EJHS STOIXEIA\n");
     for (i=0;i<NumberOfNodes;i++)
-        printf("(%d:<%s,%d>->%d) ",i,Node[i].Data.onoma,Node[i].Data.gymnasio, Node[i].Next);
+        printf("(%d:<%s,%d> ->%d) ",i,Node[i].Data.onoma,Node[i].Data.gymnasio, Node[i].Next);
     printf("\n");
 }
