@@ -57,7 +57,7 @@ int main(){
     do {
         printf("Enter observations number: ");
         scanf("%d", &n);
-    }while (n < 0 || n > NumberOfNodes);
+    }while (n <= 0 || n > NumberOfNodes);
 
 
     InitializeStoragePool(lista, &FreePtr);
