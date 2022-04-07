@@ -29,7 +29,7 @@ void LinkedTraverse(ListPointer List);
 void LinearSearch(ListPointer List, ListElementType Item, ListPointer *PredPtr, boolean *Found);
 void OrderedLinearSearch(ListPointer List, ListElementType Item, ListPointer *PredPtr, boolean *Found);
 
-void delete_n_element(ListPointer *List, ListPointer *PredPtr, int n);
+void delete_n_element(ListPointer *List, int n);
 
 int main(){
     ListPointer deikths, PredPtr;
@@ -60,7 +60,7 @@ int main(){
     printf("Arxiki lista\n");
     LinkedTraverse(deikths);
 
-    delete_n_element(&deikths, &PredPtr, thesh);
+    delete_n_element(&deikths, thesh);
 
     printf("Teliki lista\n");
     LinkedTraverse(deikths);
@@ -68,32 +68,35 @@ int main(){
     return 0;
 }
 
-void delete_n_element(ListPointer *List, ListPointer *PredPtr, int n){
+void delete_n_element(ListPointer *List, int n){
     ListPointer TempPtr;
     int times;
-    ListPointer CurrPtr, prev, curr;
+    ListPointer CurrPtr, PredPtr, prev, curr;
     boolean stop;
 
     CurrPtr = *List;
-    *PredPtr = NULL;
+    PredPtr = NULL;
     stop = FALSE;
+    if (!EmptyList(*List)){
+        while (!stop && CurrPtr!=NULL )
+        {
+             times++;
 
-    while (!stop && CurrPtr!=NULL )
-    {
-         times++;
+             if (times == n){
+                stop = TRUE;
+                LinkedDelete(List, PredPtr);
 
-         if (times == n){
-         	stop = TRUE;
-         	LinkedDelete(List, *PredPtr);
-
+            }
+             else
+             {
+                PredPtr = CurrPtr;
+                CurrPtr = CurrPtr->Next;
+             }
         }
-         else
-         {
-         	*PredPtr = CurrPtr;
-            CurrPtr = CurrPtr->Next;
-         }
-	}
-
+    }
+    else{
+        printf("Empty List...\n");
+    }
 }
 
 void CreateList(ListPointer *List)
@@ -257,5 +260,3 @@ void OrderedLinearSearch(ListPointer List, ListElementType Item, ListPointer *Pr
          }
 	}
 }
-
-
