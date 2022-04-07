@@ -29,7 +29,7 @@ void LinkedTraverse(ListPointer List);
 void LinearSearch(ListPointer List, ListElementType Item, ListPointer *PredPtr, boolean *Found);
 void OrderedLinearSearch(ListPointer List, ListElementType Item, ListPointer *PredPtr, boolean *Found);
 
-void DelNthElement(ListPointer *List, ListPointer *PredPtr, int n);
+void delete_n_element(ListPointer *List, ListPointer *PredPtr, int n);
 
 int main(){
     ListPointer deikths, PredPtr;
@@ -60,7 +60,7 @@ int main(){
     printf("Arxiki lista\n");
     LinkedTraverse(deikths);
 
-    DelNthElement(&deikths, &PredPtr, thesh);
+    delete_n_element(&deikths, &PredPtr, thesh);
 
     printf("Teliki lista\n");
     LinkedTraverse(deikths);
@@ -68,7 +68,7 @@ int main(){
     return 0;
 }
 
-void DelNthElement(ListPointer *List, ListPointer *PredPtr, int n){
+void delete_n_element(ListPointer *List, ListPointer *PredPtr, int n){
     ListPointer TempPtr;
     int times;
     ListPointer CurrPtr, prev, curr;
