@@ -89,19 +89,34 @@ void LinkedTraverse(ListPointer List)
 
 void UniqueList(ListPointer InList, ListPointer *OutList)
 {
-    ListPointer currptr=InList,nextptr=currptr->Next,preptr=NULL;
+    ListPointer Flist, currptr=InList,nextptr=currptr->Next,preptr=NULL, tempPtr;
 
-    while(currptr!=NULL){
+    CreateList(&Flist);
+    tempPtr=Flist;
+    int i=0;
+    while(currptr!=NULL)
+    {
         if(nextptr!=NULL)
-           while(currptr->Data==nextptr->Data){
+           while(currptr->Data==nextptr->Data)
+           {
                  currptr=currptr->Next;
                  nextptr=nextptr->Next;
-                 if(currptr==NULL || nextptr==NULL) break;
+                 if(currptr==NULL || nextptr==NULL)
+                    break;
            }
-        if(currptr==NULL) break;
-        LinkedInsert(OutList,currptr->Data,preptr);
+        if(currptr==NULL)
+            break;
+
+        LinkedInsert(&Flist,currptr->Data,preptr);
         currptr=currptr->Next;
         if(nextptr!=NULL)
           nextptr=nextptr->Next;
+    }
+    currptr=Flist;
+    CreateList(OutList);
+    while(currptr!=NULL)
+    {
+        LinkedInsert(&(*OutList),currptr->Data,preptr);
+        currptr=currptr->Next;
     }
 }
