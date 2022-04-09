@@ -30,12 +30,14 @@ int main()
     CreateList(&outlist);
     printf("DWSE TON PLH8OS TWN STOIXEIWN THS LISTAS: ");
     scanf("%d",&n);
-    for(i=0;i<n;i++){
-        printf("DWSE TON ARI8MO GIA EISAGWGH STH ARXH THS LISTAS: ");
-        scanf("%d",&arth);
-        LinkedInsert(&inlist,arth,preptr);
-    }
+    if (n != 0){
+        for(i=0;i<n;i++){
+            printf("DWSE TON ARI8MO GIA EISAGWGH STH ARXH THS LISTAS: ");
+            scanf("%d",&arth);
+            LinkedInsert(&inlist,arth,preptr);
+        }
     UniqueList(inlist,&outlist);
+    }
     printf("Arxiki lista\n");
     LinkedTraverse(inlist);
     printf("Teliki lista\n");
