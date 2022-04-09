@@ -76,7 +76,7 @@ void LinkedTraverse(ListPointer List)
 	ListPointer CurrPtr;
 
    if (EmptyList(List))
-   	    printf("EMPTY LIST\n");
+   	    printf("EMPTY LIST");
    else
    {
    	    CurrPtr = List;
