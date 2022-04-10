@@ -40,7 +40,9 @@ int main()
     }
     printf("Arxiki lista\n");
     LinkedTraverse(inlist);
-    printf("\nTeliki lista\n");
+    if(!EmptyList(inlist))
+        printf("\n");
+    printf("Teliki lista\n");
     LinkedTraverse(outlist);
     return 0;
 }
