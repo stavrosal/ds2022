@@ -40,7 +40,7 @@ int main()
     }
     printf("Arxiki lista\n");
     LinkedTraverse(inlist);
-    printf("Teliki lista\n");
+    printf("\nTeliki lista\n");
     LinkedTraverse(outlist);
     return 0;
 }
@@ -76,7 +76,7 @@ void LinkedTraverse(ListPointer List)
 	ListPointer CurrPtr;
 
    if (EmptyList(List))
-   	    printf("EMPTY LIST");
+   	    printf("EMPTY LIST\n");
    else
    {
    	    CurrPtr = List;
@@ -86,7 +86,6 @@ void LinkedTraverse(ListPointer List)
              CurrPtr = CurrPtr->Next;
         }
    }
-   printf("\n");
 }
 
 void UniqueList(ListPointer InList, ListPointer *OutList)
