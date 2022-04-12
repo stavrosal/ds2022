@@ -119,7 +119,6 @@ void TraverseStack(StackPointer Stack)
              CurrPtr = CurrPtr->Next;
         }
    }
-    printf("\n");
 }
 
 int find_plith(StackPointer *w)
