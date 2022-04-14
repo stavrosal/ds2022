@@ -85,7 +85,7 @@ int main(){
     printf("Oura Aplwn Xrhstwn\n");
     TraverseQ(users);
 
-
+    fclose(infile);
     return 0;
 }
 
@@ -107,6 +107,7 @@ boolean isinFile(FILE *file, QueueElementType input[]){
                 break;
         }
     }
+    fclose(file);
     return found;
 }
 
