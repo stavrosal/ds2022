@@ -76,8 +76,8 @@ int main(){
         do{
             printf("New insertion Y/N (Y=yes, N=No)");
             scanf(" %s", &selection);
-        }while(selection != 'Y' && selection != 'N');
-    }while (selection == 'Y');
+        }while(toupper(selection) != 'Y' && toupper(selection) != 'N');
+    }while (toupper(selection) == 'Y');
 
 
     printf("Oura Diaxeiristwn\n");
