@@ -12,7 +12,7 @@ typedef struct QueueNode *QueuePointer;
 typedef struct QueueNode
 {
     QueuePointer Next;
-    QueueElementType Data[8];
+    QueueElementType Data[9];
 } QueueNode;
 
 typedef struct
@@ -92,7 +92,7 @@ int main(){
 boolean isinFile(FILE *file, QueueElementType input[]){
     int nscan;
     boolean found;
-    char onoma[8], termch;
+    char onoma[9], termch;
 
     file = fopen("I11F4.dat", "r");
 
