@@ -60,7 +60,7 @@ int main(){
         }
         else{
             if (isinQ(users, input) || isinQ(admins, input)){
-                printf("You have logged in to the system from another terminal. New access is forbidden.");
+                printf("You have logged in to the system from another terminal. New access is forbidden.\n");
             }
             else{
                 if (input[0] == 'U' && input[1] == 'S' && input[2] == 'R'){
