@@ -29,7 +29,7 @@ void BSTSearch2(BinTreePointer Root, BinTreeElementType KeyValue, boolean *Found
 void BSTDelete(BinTreePointer *Root, BinTreeElementType KeyValue);
 void InorderTraversal(BinTreePointer Root);
 
-int BSTLevel(BinTreePointer *Root, BinTreeElementType n);
+int BSTLevel(BinTreePointer Root, BinTreeElementType n);
 
 int main(){
     BinTreePointer root;
@@ -45,23 +45,23 @@ int main(){
     BSTInsert(&root, 'S');
 
     printf("\n");
-    printf("Level of P: %d\n", BSTLevel(&root, 'P'));
-    printf("Level of R: %d\n", BSTLevel(&root, 'R'));
-    printf("Level of O: %d\n", BSTLevel(&root, 'O'));
-    printf("Level of G: %d\n", BSTLevel(&root, 'G'));
-    printf("Level of A: %d\n", BSTLevel(&root, 'A'));
-    printf("Level of M: %d\n", BSTLevel(&root, 'M'));
-    printf("Level of S: %d\n", BSTLevel(&root, 'S'));
+    printf("Level of P: %d\n", BSTLevel(root, 'P'));
+    printf("Level of R: %d\n", BSTLevel(root, 'R'));
+    printf("Level of O: %d\n", BSTLevel(root, 'O'));
+    printf("Level of G: %d\n", BSTLevel(root, 'G'));
+    printf("Level of A: %d\n", BSTLevel(root, 'A'));
+    printf("Level of M: %d\n", BSTLevel(root, 'M'));
+    printf("Level of S: %d\n", BSTLevel(root, 'S'));
 
 
     return 0;
 }
 
-int BSTLevel(BinTreePointer *Root, char n){
+int BSTLevel(BinTreePointer Root, char n){
     BinTreePointer thesh;
     int x=1;
 
-    thesh = *Root;
+    thesh = Root;
 
     while (thesh != NULL){
         if (n < thesh->Data){
@@ -246,6 +246,5 @@ void InorderTraversal(BinTreePointer Root)
         InorderTraversal(Root->RChild);
     }
 }
-
 
 
