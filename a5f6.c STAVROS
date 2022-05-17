@@ -103,7 +103,6 @@ int main(){
         scanf("%7s", tpass);
 
         SearchHashList(HList, foldKey(tname), &Loc, &Pred);
-        SearchHashList(HList, foldKey(tname), &Loc, &Pred);
         if (strcmp(HList.List[Loc].Data.name, tname) != 0 || Loc == -1)
             printf("Access is forbidden: Wrong user ID\n");
         else if (strcmp(HList.List[Loc].Data.password, tpass) != 0){
