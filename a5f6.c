@@ -1,18 +1,21 @@
+//filename : a5f6.c
+
 #include <stdio.h>
-#include <ctype.h>
 #include <stdlib.h>
+#include <ctype.h>
 #include <string.h>
 
-#define HMax 9
+#define HMax 9              /*     το μέγεθος του πίνακα HashTable */
 
-#define VMax 30
+#define VMax 8             /*το μέγεθος της λίστας, */
 
-#define EndOfList -1
+#define EndOfList -1        /* σημαία που σηματοδοτεί το τέλος της λίστας
+                                και της κάθε υπολίστας συνωνύμων */
 
 typedef struct{
-    char user_id[8];
+    char name[9];
     char password[6];
-}ListElementType;
+} ListElementType;  /*τύπος δεδομένων για τα στοιχεία της λίστας */
 
 typedef int KeyType;
 
@@ -23,10 +26,10 @@ typedef struct {
 } ListElm;
 
 typedef struct  {
-	int HashTable[HMax];
-    int Size;
-	int SubListPtr;
-    int StackPtr;
+	int HashTable[HMax];   // πίνακας δεικτών προς τις υπολίστες συνωνύμων
+    int Size;                // πλήθος εγγραφών της λίστας List
+	int SubListPtr;          // Dδείκτης σε μια υπολίστα συνωνύμων
+    int StackPtr;           // δείκτης προς την πρώτη ελεύθερη θέση της λίστας List
 	ListElm List[VMax];
 } HashListType;
 
@@ -41,65 +44,122 @@ void SearchSynonymList(HashListType HList,KeyType KeyArg,int *Loc,int *Pred);
 void SearchHashList(HashListType HList,KeyType KeyArg,int *Loc,int *Pred);
 void AddRec(HashListType *HList,ListElm InRec);
 void DeleteRec(HashListType *HList,KeyType DelKey);
-void PrintPinakes(HashListType HList);
-int foldkey(char key[]);
 
-int main()
-{
+void Print_HashList(HashListType HList);
+void PrintPinakes(HashListType HList, int count);
+
+int foldKey(char name[HMax]);
+
+
+int main(){
     FILE *infile;
-    HashListType board;
-    ListElm bd;
-    int nscan,lock=-1,pred=-1;
-    char temch,id[8],pas[6];
+    int Loc, Pred;
+    char termch;
+    HashListType HList;
+    ListElm rec;
 
-    CreateHashList(&board);
-    infile=fopen("I5f6.txt","r");
-    if(infile==NULL) exit(1);
-    while(TRUE){
-        nscan=fscanf(infile,"%s%c%s%c",bd.Data.user_id,&temch,bd.Data.password,&temch);
-        if(nscan==EOF) break;
-        bd.key=foldkey(bd.Data.user_id);
-        AddRec(&board,bd);
+    infile = fopen("I5f6.txt", "r");
+    if (infile == NULL){
+        printf("Error while opening file.\n");
+        return(1);
     }
-    PrintPinakes(board);
-    do{printf("USERNAME: ");
-    scanf("%s",id);
-    temch=getchar();
-    nscan=foldkey(id);
-    printf("PASSWORD: ");
-    scanf("%s",pas);
-    temch=getchar();
-    SearchHashList(board,nscan,&lock,&pred);
-    if(lock!=-1){
-        if(strcmp(board.List[nscan].Data.password,pas)==0) printf("You have logged in to the system\n");
-        else printf("Access is forbidden: Wrong password\n");
+
+    CreateHashList(&HList);
+
+    char str[HMax], str2[HMax];
+    int count=0, key;
+    while (fgets(str, VMax, infile) != NULL){
+        fgets(str2, VMax, infile);
+
+        if (strlen(str) > 0 && str[strlen(str)-1] == '\n'){
+
+            str[(strlen(str)-1)] = '\0';
+
+            }
+        if (strlen(str2) > 0 && str2[strlen(str2)-1] == '\n'){
+
+            str2[(strlen(str2)-1)] = '\0';
+
+            }
+
+        key = foldKey(str);
+
+        count++;
+
+        rec.key = key;
+        rec.Link = -1;
+        strcpy(rec.Data.name, str);
+        strcpy(rec.Data.password, str2);
+
+        AddRec(&HList, rec);
     }
-    else printf("Access is forbidden: Wrong user ID\n");
-    printf("Continue Y/N? ");
-    temch=getchar();
-    }while(temch=='y');
-    fclose(infile);
-    return 0;
+    PrintPinakes(HList, count);
+    char tname[9], tpass[7], selection;
+
+    do{
+        printf("USERNAME: ");
+        scanf("%8s", tname);
+        printf("PASSWORD: ");
+        scanf("%7s", tpass);
+
+        SearchHashList(HList, foldKey(tname), &Loc, &Pred);
+        SearchHashList(HList, foldKey(tname), &Loc, &Pred);
+        if (strcmp(HList.List[Loc].Data.name, tname) != 0 || Loc == -1)
+            printf("Access is forbidden: Wrong user ID\n");
+        else if (strcmp(HList.List[Loc].Data.password, tpass) != 0){
+            printf("Access is forbidden: Wrong password\n");
+        }
+        else{
+            printf("You have logged in to the system\n");
+        }
+
+
+        do{
+            printf("Continue Y/N? ");
+            scanf(" %s", &selection);
+        }while(toupper(selection) != 'Y' && toupper(selection) != 'N');
+    }while (toupper(selection) == 'Y');
+
+
+}
+
+int foldKey(char name[HMax]){
+    int x;
+    x = (name[0] + name[(strlen(name)-1)]) / 2;
+    return x;
 }
 
 int HashKey(KeyType key)
+/* Δέχεται:    Την τιμή key ενός κλειδιού.
+   Λειτουργία: Βρίσκει την τιμή κατακερματισμού HValue για το κλειδί Key.
+   Επιστρέφει: Την τιμή κατακερματισμού HValue
+*/
 {
+	/*σε περίπτωση που το KeyType δεν είναι ακέραιος
+	θα πρέπει να μετατρέπεται κατάλληλα το κλειδί σε αριθμό*/
 	return key%HMax;
 }
 
 void CreateHashList(HashListType *HList)
+/* Λειτουργία: Δημιουργεί μια δομή HList.
+   Επιστρέφει: Την δομή HList
+*/
 {
 	int index;
 
-	HList->Size=0;
-	HList->StackPtr=0;
+	HList->Size=0;           //ΔΗΜΙΟΥΡΓΕΙ ΜΙΑ ΚΕΝΗ ΛΙΣΤΑ
+	HList->StackPtr=0;       //ΔΕΙΚΤΗς ΣΤΗ ΚΟΡΥΦΗ ΤΗΣ ΣΤΟΙΒΑΣ ΤΩΝ ΕΛΕΥΘΕΡΩΝ ΘΕΣΕΩΝ
 
+    /*ΑΡΧΙΚΟΠΟΙΕΙ ΤΟΝ ΠΙΝΑΚΑ HashTable ΤΗΣ ΔΟΜΗΣ HList ΩΣΤΕ ΚΑΘΕ ΣΤΟΙΧΕΙΟΥ ΤΟΥ
+        ΝΑ ΕΧΕΙ ΤΗ ΤΙΜΗ EndOfList (-1)*/
     index=0;
 	while (index<HMax)
 	{
 		HList->HashTable[index]=EndOfList;
 		index=index+1;
     }
+
+     //Δημιουργία της στοίβας των ελεύθερων θέσεων στη λίστα HList
     index=0;
 	while(index < VMax-1)
 	{
@@ -110,11 +170,20 @@ void CreateHashList(HashListType *HList)
 }
 
 boolean FullHashList(HashListType HList)
+/* Δέχεται:    Μια δομή HList.
+   Λειτουργία: Ελέγχει αν η λίστα List της δομής HList είναι γεμάτη.
+   Επιστρέφει: TRUE αν η λίστα List είναι γεμάτη, FALSE διαφορετικά.
+*/
 {
 	return(HList.Size==VMax);
 }
 
 void SearchSynonymList(HashListType HList,KeyType KeyArg,int *Loc,int *Pred)
+/* Δέχεται:     Μια δομή HList και μια τιμή κλειδιού KeyArg.
+    Λειτουργία: Αναζητά μια εγγραφή με κλειδί KeyArg στην υπολίστα συνωνύμων.
+    Επιστρέφει: Τη θέση Loc της εγγραφής και τη θέση Pred της προηγούμενης
+                εγγραφής στην υπολίστα
+*/
 {
 	int Next;
 	Next=HList.SubListPtr;
@@ -135,6 +204,12 @@ void SearchSynonymList(HashListType HList,KeyType KeyArg,int *Loc,int *Pred)
 	}
 }
 void SearchHashList(HashListType HList,KeyType KeyArg,int *Loc,int *Pred)
+/* Δέχεται:     Μια δομή HList και μια τιμή κλειδιού KeyArg.
+    Λειτουργία: Αναζητά μια εγγραφή με κλειδί KeyArg στη δομή HList.
+    Επιστρέφει: Τη θέση Loc της εγγραφής και τη θέση Pred της
+                προηγούμενης εγγραφής της υπολίστας στην οποία ανήκει.
+                Αν δεν υπάρχει εγγραφή με κλειδί KeyArg τότε Loc=Pred=-1
+*/
 {
 	int HVal;
 	HVal=HashKey(KeyArg);
@@ -151,14 +226,22 @@ void SearchHashList(HashListType HList,KeyType KeyArg,int *Loc,int *Pred)
 }
 
 void AddRec(HashListType *HList,ListElm InRec)
+/* Δέχεται:    Μια δομή HList και μια εγγραφή InRec.
+   Λειτουργία: Εισάγει την εγγραφή InRec στη λίστα List, αν δεν είναι γεμάτη,
+                και ενημερώνει τη δομή HList.
+   Επιστρέφει: Την τροποποιημένη δομή HList.
+   Έξοδος:     Μήνυμα γεμάτης λίστας, αν η List είναι γεμάτη, διαφορετικά,
+                αν υπάρχει ήδη εγγραφή με το ίδιο κλειδί,
+                εμφάνιση αντίστοιχου μηνύματος
+*/
 {
 	int Loc, Pred, New, HVal;
 
+   // New=0;
 	if(!(FullHashList(*HList)))
 	{
 		Loc=-1;
 		Pred=-1;
-		InRec.key=foldkey(InRec.Data.user_id);
 		SearchHashList(*HList,InRec.key,&Loc,&Pred);
 		if(Loc==-1)
 		{
@@ -168,7 +251,6 @@ void AddRec(HashListType *HList,ListElm InRec)
 			HList->List[New]=InRec;
 			if (Pred==-1)
 			{
-
 			    HVal=HashKey(InRec.key);
                 HList->HashTable[HVal]=New;
 				HList->List[New].Link=EndOfList;
@@ -191,6 +273,13 @@ void AddRec(HashListType *HList,ListElm InRec)
 	}
 }
 void DeleteRec(HashListType *HList,KeyType DelKey)
+/* DEXETAI:    TH DOMH (HList) KAI To KLEIDI (DelKey) THS EGGRAFHS
+               POY PROKEITAI NA DIAGRAFEI
+   LEITOYRGIA: DIAGRAFEI, THN EGGRAFH ME KLEIDI (DelKey) APO TH
+               LISTA (List), AN YPARXEI ENHMERWNEI THN DOMH HList
+   EPISTREFEI: THN TROPOPOIHMENH DOMH (HList)
+   EJODOS:     "DEN YPARXEI EGGRAFH ME KLEIDI" MHNYMA
+*/
 {
 	int Loc, Pred, HVal;
 
@@ -216,26 +305,54 @@ void DeleteRec(HashListType *HList,KeyType DelKey)
 	}
 }
 
-void PrintPinakes(HashListType HList)
+void Print_HashList(HashListType HList)
+{
+   int i, SubIndex;
+
+     printf("HASHLIST STRUCTURE with SYNONYM CHAINING\n");
+     printf("========================================\n");
+
+          printf("PINAKAS DEIKTWN STIS YPO-LISTES SYNWNYMWN EGGRAFWN:\n");
+            for (i=0; i<HMax;i++)
+              printf("%d| %d\n",i,HList.HashTable[i]);
+
+          printf("OI YPO-LISTES TWN SYNWNYMWN EGGRAFWN:\n");
+          for (i=0; i<HMax;i++)
+          {
+              SubIndex = HList.HashTable[i];
+              while ( SubIndex != EndOfList )
+              {
+                   printf("[%d, %d, %d]",HList.List[SubIndex].key,HList.List[SubIndex].Data,HList.List[SubIndex].Link);
+                   printf(" -> ");
+                   SubIndex = HList.List[SubIndex].Link;
+               } //* while *)
+              printf("TELOS % dHS YPO-LISTAS\n", i);
+          }
+
+          printf("H STOIBA TWN ELEY8ERWN 8ESEWN THS LISTAS:\n");
+          SubIndex = HList.StackPtr;
+          while ( SubIndex != EndOfList )
+          {
+                printf("%d <= ",SubIndex);
+                SubIndex = HList.List[SubIndex].Link;
+          }
+          printf("TELOS\n");
+
+          printf("MEGE8OS THS LISTAS = %d\n", HList.Size);
+          printf("========================================\n");
+}
+
+
+void PrintPinakes(HashListType HList, int count)
 {
     int i;
 	printf("Hash table\n");
-	for (i=0;i<HMax;i++)
+	for (i=0; i<HMax;i++)
               printf("%d)%3d\n",i,HList.HashTable[i]);
-    printf("\n");
-	printf("Hash List\n");
-    for (i=0;i<4;i++)
-	   printf("%d)%d,    %s, %s, %d\n",i,HList.List[i].key,HList.List[i].Data.user_id,HList.List[i].Data.password,HList.List[i].Link);
+
+	printf("\nHash List\n");
+    for (i=0;i<count;i++)
+	   printf("%d) %d, %9s, %9s, %4d\n", i, HList.List[i].key, HList.List[i].Data.name, HList.List[i].Data.password, HList.List[i].Link);
 	printf("\n");
 }
 
-int foldkey(char key[])
-{
-    int i;
-    char c1=key[0],c2;
-
-    for(i=0;key[i]!='\0';i++);
-    c2=key[i-1];
-    i=(c1+c2)/2;
-    return i;
-}
