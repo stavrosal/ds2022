@@ -1,1 +1,16 @@
+<pre>*** <b>EXERCISE a32f5.c</b> ***
 
+=== COMPILATION === 
+SUCCESSFUL
+
+=== EXECUTION === 
+First tree with inorder traverse
+A G H I L M O R T 
+Second tree with inorder traverse
+A G H I L M O R T 
+First tree LeftNodeCount = 3
+Second tree LeftNodeCount = 5
+
+=== EXECUTION RESULT: === 
+CORRECT
+GRADE:10
