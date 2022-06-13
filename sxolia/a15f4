@@ -1,1 +1,35 @@
+</pre>,<pre>*** <b>EXERCISE a15f4.c</b> ***
 
+=== COMPILATION === 
+SUCCESSFUL
+
+=== EXECUTION. TEST #1 === 
+Plithos fortiwn: 5
+Arithmos kivwtiwn gia to 1o fortio: 4
+Synoliko baros gia to 1o fortio: 10.5
+Imeromhnia liksis gia to 1o fortio: 14/05/2019
+Arithmos kivwtiwn gia to 2o fortio: 5
+Synoliko baros gia to 2o fortio: 20.52
+Imeromhnia liksis gia to 2o fortio: 21/12/2019
+Arithmos kivwtiwn gia to 3o fortio: 2
+Synoliko baros gia to 3o fortio: 80
+Imeromhnia liksis gia to 3o fortio: 31/08/2021
+Arithmos kivwtiwn gia to 4o fortio: 3
+Synoliko baros gia to 4o fortio: 40.25
+Imeromhnia liksis gia to 4o fortio: 12/12/2021
+Arithmos kivwtiwn gia to 5o fortio: 6
+Synoliko baros gia to 5o fortio: 42.45
+Imeromhnia liksis gia to 5o fortio: 12/12/2019
+WAREHOUSE 1
+3 40.25 12/12/2021
+2 80.00 31/08/2021
+WAREHOUSE 2
+5 20.52 21/12/2019
+WAREHOUSE 3
+6 42.45 12/12/2019
+4 10.50 14/05/2019
+
+=== EXECUTION RESULT: === 
+CORRECT
+GRADE:10
+</pre>
