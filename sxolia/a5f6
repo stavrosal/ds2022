@@ -1,1 +1,40 @@
+<pre>*** <b>EXERCISE a5f6.c</b> ***
 
+=== COMPILATION === 
+SUCCESSFUL
+
+=== EXECUTION. TEST #1 === 
+Hash table
+0) -1
+1) -1
+2)  2
+3) -1
+4)  0
+5) -1
+6) -1
+7) -1
+8)  1
+
+Hash List
+0) 85,     Areti,    235621,    3
+1) 71,      MAYA,    456123,   -1
+2) 83,     user1,    123456,   -1
+3) 67,     USER2,    111111,   -1
+
+USERNAME: Areti
+PASSWORD: 123
+Access is forbidden: Wrong password
+Continue Y/N? y
+USERNAME: areti
+PASSWORD: 235621
+Access is forbidden: Wrong user ID
+Continue Y/N? y
+USERNAME: Areti
+PASSWORD: 235621
+You have logged in to the system
+Continue Y/N? n
+
+=== EXECUTION RESULT: === 
+CORRECT
+GRADE:10
+</pre>
