@@ -1,1 +1,42 @@
+<pre>*** <b>EXERCISE a32f4.c</b> ***
 
+=== COMPILATION === 
+SUCCESSFUL
+
+=== EXECUTION. TEST #1 === 
+Question a:
+1o STOIXEIO LISTAS=9, 1H FREE POSITION=-1
+H STORAGE POOL EXEI TA EJHS STOIXEIA
+(0:<TAKIS,3> ->-1) (1:<MANOS,20> ->0) (2:<ANNA,18> ->1) (3:<HLIAS,31> ->2) (4:<NIKOS,9> ->3) (5:<ASPA,22> ->4) (6:<MARIA,2> ->5) (7:<TASOS,7> ->6) (8:<ALIKI,1> ->7) (9:<KOSTAS,11> ->8) 
+Lista A
+(9:<KOSTAS,11> ->8) (8:<ALIKI,1> ->7) (7:<TASOS,7> ->6) (6:<MARIA,2> ->5) (5:<ASPA,22> ->4) (4:<NIKOS,9> ->3) (3:<HLIAS,31> ->2) (2:<ANNA,18> ->1) (1:<MANOS,20> ->0) (0:<TAKIS,3> ->-1) 
+Dwse thn thesh toy ma8hth poy klhrw8hke:4
+Dwse thn thesh toy ma8hth poy klhrw8hke:6
+Dwse thn thesh toy ma8hth poy klhrw8hke:0
+Dwse thn thesh toy ma8hth poy klhrw8hke:9
+Question b:
+1o STOIXEIO LISTAS=8, 1H FREE POSITION=9
+H STORAGE POOL EXEI TA EJHS STOIXEIA
+(0:< ,-1> ->6) (1:<MANOS,20> ->-1) (2:<ANNA,18> ->1) (3:<HLIAS,31> ->2) (4:< ,-1> ->-1) (5:<ASPA,22> ->3) (6:< ,-1> ->4) (7:<TASOS,7> ->5) (8:<ALIKI,1> ->7) (9:< ,-1> ->0) 
+Lista A
+(8:<ALIKI,1> ->7) (7:<TASOS,7> ->5) (5:<ASPA,22> ->3) (3:<HLIAS,31> ->2) (2:<ANNA,18> ->1) (1:<MANOS,20> ->-1) 
+1o STOIXEIO LISTAS=0, 1H FREE POSITION=4
+H STORAGE POOL EXEI TA EJHS STOIXEIA
+(0:<NIKOS,9> ->1) (1:<MARIA,2> ->2) (2:<TAKIS,3> ->3) (3:<KOSTAS,11> ->-1) (4:< ,-1> ->5) (5:< ,-1> ->6) (6:< ,-1> ->7) (7:< ,-1> ->8) (8:< ,-1> ->9) (9:< ,-1> ->-1) 
+Lista B
+(0:<NIKOS,9> ->1) (1:<MARIA,2> ->2) (2:<TAKIS,3> ->3) (3:<KOSTAS,11> ->-1) 
+Question c:
+1o STOIXEIO LISTAS=9, 1H FREE POSITION=0
+H STORAGE POOL EXEI TA EJHS STOIXEIA
+(0:< ,-1> ->6) (1:<MANOS,20> ->-1) (2:<ANNA,18> ->1) (3:<HLIAS,31> ->2) (4:< ,-1> ->-1) (5:<ASPA,22> ->3) (6:< ,-1> ->4) (7:<TASOS,7> ->5) (8:<ALIKI,1> ->7) (9:<MARIA,2> ->8) 
+Lista A
+(9:<MARIA,2> ->8) (8:<ALIKI,1> ->7) (7:<TASOS,7> ->5) (5:<ASPA,22> ->3) (3:<HLIAS,31> ->2) (2:<ANNA,18> ->1) (1:<MANOS,20> ->-1) 
+1o STOIXEIO LISTAS=0, 1H FREE POSITION=1
+H STORAGE POOL EXEI TA EJHS STOIXEIA
+(0:<NIKOS,9> ->2) (1:< ,-1> ->4) (2:<TAKIS,3> ->3) (3:<KOSTAS,11> ->-1) (4:< ,-1> ->5) (5:< ,-1> ->6) (6:< ,-1> ->7) (7:< ,-1> ->8) (8:< ,-1> ->9) (9:< ,-1> ->-1) 
+Lista B
+(0:<NIKOS,9> ->2) (2:<TAKIS,3> ->3) (3:<KOSTAS,11> ->-1) 
+
+=== EXECUTION RESULT: === 
+CORRECT
+GRADE:10
