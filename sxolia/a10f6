@@ -1,0 +1,53 @@
+<pre>*** <b>EXERCISE a10f6.c</b> ***
+
+=== COMPILATION === 
+SUCCESSFUL
+
+=== EXECUTION. TEST #1 === 
+Declare variables
+Enter the variable name: ABA
+Enter variable value: 5
+Enter the variable name: FLAG
+Enter variable value: 10
+Enter the variable name: CAT
+Enter variable value: 2
+Enter the variable name: BDC
+Enter variable value: 3
+[65, CAT 2, -1] -> TELOS  3HS YPO-LISTAS
+[8, ABA 5, -1] -> TELOS  8HS YPO-LISTAS
+[19, BDC 3, -1] -> TELOS  19HS YPO-LISTAS
+[61, FLAG 10, -1] -> TELOS  30HS YPO-LISTAS
+Multiply Variables
+Enter the first variable: FALG
+Enter the second variable: ABA
+Undeclared variable FALG
+Add variables
+Enter the first variable: CAT
+Enter the second variable: ABA
+CAT+ABA=7
+=== EXECUTION. TEST #2 === 
+Declare variables
+Enter the variable name: ABA
+Enter variable value: 5
+Enter the variable name: FLAG
+Enter variable value: 10
+Enter the variable name: CAT
+Enter variable value: 2
+Enter the variable name: BDC
+Enter variable value: 3
+[65, CAT 2, -1] -> TELOS  3HS YPO-LISTAS
+[8, ABA 5, -1] -> TELOS  8HS YPO-LISTAS
+[19, BDC 3, -1] -> TELOS  19HS YPO-LISTAS
+[61, FLAG 10, -1] -> TELOS  30HS YPO-LISTAS
+Multiply Variables
+Enter the first variable: FLAG
+Enter the second variable: ABA
+FLAGxABA=50
+Add variables
+Enter the first variable: CAT
+Enter the second variable: ABA
+CAT+ABA=7
+=== EXECUTION RESULT: === 
+CORRECT
+GRADE:10
+</pre>
